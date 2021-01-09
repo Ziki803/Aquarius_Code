@@ -18,14 +18,10 @@ let countBotReactionsActivated = 0;
 let count = 0;
 let chatBotActivated = 0;
 
+const ytdl = require('ytdl-core');
+
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  //set status
-  //#region 
-  client.user.setPresence({ watching: { name: 'The Brightest Star in the Galaxy' }, status: 'online' }); 
-  //online, idle, dnd, invisible 
-  //listening, playing, watching, streaming, custom status
-  //#endregion
 });
 
 client.on('message', async message => {
@@ -118,7 +114,14 @@ if (countBotActivated === 1) {
   }
   //#endregion
 
-    //voice
+  if (message.content === `${prefix}setbotstatus`) {
+    client.user.setPresence({ watching: { name: 'The Brightest Star in the Galaxy' }, status: 'online' }); 
+    console.log('running setbotstatus');
+  }
+  //online, idle, dnd, invisible 
+  //listening, playing, watching, streaming, custom status
+
+  //voice
   //#region
   if (message.content === `${prefix}join`) {
     if (message.member.voice.channel) {
@@ -139,6 +142,15 @@ if (countBotActivated === 1) {
     connection.disconnect(); //voiceChannel.leave(); both ok
     message.channel.send(`On request from ${message.author}, left the vc 🚪`);
   }
+
+  /* if (message.content === `${prefix}play`) {
+    if (message.member.voice.channel) {
+      const connection = await message.member.voice.channel.join();
+      const dispatcher = connection.play(ytdl('https://www.youtube.com/watch?v=wm37xkws5lQ&ab_channel=Lizzie817', { filter: 'audioonly' }));
+    } else {
+      message.channel.send(`${message.author}, I am not in a vc!`);
+    }
+  } */
   //#endregion
 
   //trimming prefixes

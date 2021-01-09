@@ -154,9 +154,8 @@ if (countBotActivated === 1) {
   //#endregion
 
   if (message.content.startsWith(`${prefix}play`)) {
-    console.log('in prefix play if statement')
     const ytdl = require('ytdl-core');
-        const connection = message.member.voice.channel.join();
+        const connection = await message.member.voice.channel.join();
         
         if (message.member.voice.channel) {
                 if (args != null) {
@@ -174,16 +173,12 @@ if (countBotActivated === 1) {
 
                 if (validateYouTubeUrl = true) {
                   //console.log('in validated yturl')
-                    //const stream = ytdl(String(args));
-                    const connection = await message.member.voice.channel.join();
-                    const stream = '/Users/leevincent/Desktop/Y8/中文/-Archives/0a假期功課及自我介紹/Chinese Poem reading/Moonlight.mp4='
-                    const dispatcher = connection.play(stream);
-
                     console.log('at dispatcher')
-                    console.log(String(args))
+                    //console.log(String(args))
 
-                    //const broadcast = client.voice.createBroadcast();
+                    const broadcast = client.voice.createBroadcast();
                     //const dispatcher = broadcast.play(ytdl(String(args)));
+                    const dispatcher = broadcast.play('/Users/leevincent/Movies/BJ/MP3/58. How Far I\'ll Go (Instrumental).mp3');
                     } else {
                         message.channel.send(`${message.author}, I am not in a vc!`);
                     } 

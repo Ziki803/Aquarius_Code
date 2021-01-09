@@ -1,4 +1,4 @@
-module.exports = {
+/* module.exports = {
     name: 'play',
     description: 'play a song from youtube, pass in a link',
     aliases:['youtube'],
@@ -7,6 +7,8 @@ module.exports = {
         const ytdl = require('ytdl-core');
         const connection = message.member.voice.channel.join();
         const client = require('../app.js')
+        const { Player } = require('discord-player');
+        client.player = require('../app.js')
         
         if (message.member.voice.channel) {
                 if (args != null) {
@@ -24,7 +26,7 @@ module.exports = {
 
                 if (validateYouTubeUrl = true) {
                     const stream = ytdl(String(args), {filter: 'audioonly'});
-                    const dispatcher = connection.play(stream);
+                    const dispatcher = player.play(stream);
     
                     dispatcher.on('start', () => {
                         console.log('audio.mp3 is now playing!');
@@ -44,3 +46,4 @@ module.exports = {
             }   
         }    
 }
+*/

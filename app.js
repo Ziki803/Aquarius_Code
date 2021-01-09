@@ -19,6 +19,8 @@ let count = 0;
 let chatBotActivated = 0;
 
 const ytdl = require('ytdl-core');
+const { Player } = require('discord-player');
+client.player = new Player(client);
 
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -120,7 +122,7 @@ if (countBotActivated === 1) {
   }
   //online, idle, dnd, invisible 
   //listening, playing, watching, streaming, custom status
-
+ 
   //voice
   //#region
   if (message.content === `${prefix}join`) {
@@ -142,23 +144,53 @@ if (countBotActivated === 1) {
     connection.disconnect(); //voiceChannel.leave(); both ok
     message.channel.send(`On request from ${message.author}, left the vc 🚪`);
   }
-
-  /* if (message.content === `${prefix}play`) {
-    if (message.member.voice.channel) {
-      const connection = await message.member.voice.channel.join();
-      const dispatcher = connection.play(ytdl('https://www.youtube.com/watch?v=wm37xkws5lQ&ab_channel=Lizzie817', { filter: 'audioonly' }));
-    } else {
-      message.channel.send(`${message.author}, I am not in a vc!`);
-    }
-  } */
   //#endregion
 
-  //trimming prefixes
+    //trimming prefixes
   //#region 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
   //#endregion
+
+  if (message.content.startsWith(`${prefix}play`)) {
+    console.log('in prefix play if statement')
+    const ytdl = require('ytdl-core');
+        const connection = message.member.voice.channel.join();
+        
+        if (message.member.voice.channel) {
+                if (args != null) {
+                const urlToParse = args;
+                //console.log('args is not null, validating function')
+                    function validateYouTubeUrl(urlToParse){
+                        if (urlToParse) {
+                            var regExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+                            if (url.match(regExp)) {
+                                return true;
+                            }
+                        } else return false;
+                    } 
+                }
+
+                if (validateYouTubeUrl = true) {
+                  //console.log('in validated yturl')
+                    //const stream = ytdl(String(args));
+                    const connection = await message.member.voice.channel.join();
+                    const stream = '/Users/leevincent/Desktop/Y8/中文/-Archives/0a假期功課及自我介紹/Chinese Poem reading/Moonlight.mp4='
+                    const dispatcher = connection.play(stream);
+
+                    console.log('at dispatcher')
+                    console.log(String(args))
+
+                    //const broadcast = client.voice.createBroadcast();
+                    //const dispatcher = broadcast.play(ytdl(String(args)));
+                    } else {
+                        message.channel.send(`${message.author}, I am not in a vc!`);
+                    } 
+            } else {
+                message.channel.send(`${message.author}, you need to provide a url!`);
+            }   
+        }    
 
   //aliases and UX UI
   //#region

@@ -11,7 +11,7 @@ module.exports = {
     const Discord = require('discord.js');
     const helpembed = new Discord.MessageEmbed()
         .setColor('#99D7F8')
-        .setTitle('Aquarius\' Commands List')
+        .setTitle('My Commands List')
         .setDescription(`**Moderation & utility** \`\`\`args, avatar, ban, beep, ping, shutdown, reload, userinfo, server, kick, purge, invite\`\`\` \n **Counting** \`\`\`enablecount, disablecount, enablecountreactions, disablecountreactions, nextno, count \`\`\` \n **VC** \`\`\`join, leave\`\`\` \n **Fun** \`\`\`sorry, spellinglist, about\`\`\``)
         .setFooter('ask me if u have anything')
         .setTimestamp()
